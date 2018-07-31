@@ -13,7 +13,7 @@
     type='text' id='filter' name='filter' 
     placeholder='filter recipe name...'>
       <div class="ui cards">
-        <app-recipe *ngFor='let localRecipe of recipes | recipeFilter: filterRecipeName' 
+        <app-recipe *ngFor='let localRecipe of recipes | async  | recipeFilter:filterRecipeName' 
           [recipe]='localRecipe'></app-recipe>
       </div>
     </div>
