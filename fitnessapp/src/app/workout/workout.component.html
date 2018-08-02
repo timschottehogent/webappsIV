@@ -1,0 +1,9 @@
+<p>
+  workout for {{workout.date | date}}
+</p>
+Exercises:
+<ul>
+  <li *ngFor="let exercise of exercises">
+    <app-exercise [name]="exercise"></app-exercise>
+  </li>
+</ul>

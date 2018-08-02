@@ -1,0 +1,11 @@
+<div class="ui large form segment"> 
+  <h3 class="ui header">Add Workout</h3>
+  <div class="field">
+	  <label for="date">Date:</label> 
+	  <input type="date" id="date" date="date" #newworkoutdate>
+  </div>
+  <button (click)="addWorkout(newworkoutdate)"
+  	    class="ui positive right floated button">
+    add workout 
+  </button>
+</div>
