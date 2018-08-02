@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Workout } from './workout/workout.model';
 import { WorkoutDataService } from './workout-data.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -17,7 +18,7 @@ export class AppComponent {
     
   }
 
-  get workouts(): Workout[]{
+  get workouts(): Observable<Workout[]>{
     return this._workoutDataService.workouts;
   }
   

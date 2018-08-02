@@ -1,25 +1,39 @@
 import { Injectable } from '@angular/core';
 import { Workout } from './workout/workout.model';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class WorkoutDataService {
-  private _workouts = new Array<Workout>();
+  private readonly _appUrl = '/API/recipes/';
 
-  constructor() { 
-    let workout1 = new Workout(new Date());
-    let workout2 = new Workout(new Date("January 31 1980 12:30"));
 
-    this._workouts.push(workout1);
-    this._workouts.push(workout2);
+  constructor(private http: HttpClient) { 
+    
   }
 
-  get workouts() : Workout[] {
-    return this._workouts;
+  get workouts(): Observable<Workout[]> {
+    return this.http
+      .get(this._appUrl)
+      .pipe(
+        map((list: any[]): Workout[] =>
+          list.map(item => 
+            new Workout(item.date)
+          )
+        )
+      );
   }
 
-  addNewWorkout(workout) {
-    this._workouts.push(workout);
+  addNewWorkout(workout: Workout): Observable<Workout> {
+    return this.http
+      .post(`${this._appUrl}/workouts/`, workout)
+      .pipe(map(Workout.fromJSON));
   }
+
+  
+
+  
 }
