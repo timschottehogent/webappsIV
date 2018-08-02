@@ -5,6 +5,7 @@ import { AppComponent } from './app.component';
 import { WorkoutComponent } from './workout/workout.component';
 import { ExerciseComponent } from './exercise/exercise.component';
 import { AddWorkoutComponent } from './add-workout/add-workout.component';
+import { WorkoutFilterPipe } from './workout-filter.pipe';
 
 
 @NgModule({
@@ -12,7 +13,8 @@ import { AddWorkoutComponent } from './add-workout/add-workout.component';
     AppComponent,
     WorkoutComponent,
     ExerciseComponent,
-    AddWorkoutComponent
+    AddWorkoutComponent,
+    WorkoutFilterPipe
   ],
   imports: [
     BrowserModule

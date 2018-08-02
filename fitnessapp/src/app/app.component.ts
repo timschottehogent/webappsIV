@@ -1,25 +1,27 @@
 import { Component } from '@angular/core';
 import { Workout } from './workout/workout.model';
+import { WorkoutDataService } from './workout-data.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
+  providers: [WorkoutDataService]
 })
 export class AppComponent {
   title = 'Fitnessapp';
 
-  private _workouts = new Array<Workout>();
+  //private _workouts = new Array<Workout>();
 
-  constructor() {
-    const workout1 = new Workout(new Date());
-    const workout2 = new Workout(new Date("January 31 1980 12:30"));
-	
-    this._workouts.push(workout1);
-    this._workouts.push(workout2);
+  constructor(private _workoutDataService: WorkoutDataService) {
+    
+  }
+
+  get workouts(): Workout[]{
+    return this._workoutDataService.workouts;
   }
   
   newWorkoutAdded(workout) {
-    this._workouts.push(workout);
+    this._workoutDataService.addNewWorkout(workout);
 }
 }
