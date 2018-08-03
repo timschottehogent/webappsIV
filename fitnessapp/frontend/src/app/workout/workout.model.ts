@@ -1,44 +1,43 @@
-import { Exercise } from './exercise/exercise.model';
+import { Exercise } from '../exercise/exercise.model';
 
 
 export class Workout {
     private _id: string;
     private _date: Date = new Date();
-    private _exercises = new Array<string>();
-    private _reps = new Array<number>();
+    private _exercises = new Array<Exercise>();
+    private _repetitions = new Array<Number>();
   
     constructor(
       date: Date,
       exercises: Exercise[] = [],
-      repetitions = Number[] = []
+      repetitions: Number[] = []
     ) {
       this._date = date;
     }
     get date() : Date {
       return this._date;
     }	
-    addExercise(name: string, amount?: number) {
-      this._exercises.push(`${amount || 1}  ${name}`);
+    addExercise(ex: Exercise, reps: number) {
+      this._exercises.push(ex);
+      this._repetitions.push(reps);
     }
 
     static fromJSON(json: any): Workout {
       const rec = new Workout(
         json.date,
-        json.ingredients.map(Ingredient.fromJSON),
+        json.exercises.map(Exercise.fromJSON),
         json.created
       );
       rec._id = json._id;
-      rec._chef = json.chef;
       return rec;
     }
   
     toJSON() {
       return {
         _id: this._id,
-        name: this._name,
-        ingredients: this._ingredients.map(ing => ing.toJSON()),
-        created: this._dateAdded,
-        chef: this._chef
+        date: this._date,
+        exercises: this._exercises.map(ex => ex.toJSON()),
+        reps: this._repetitions
       };
     }
   }

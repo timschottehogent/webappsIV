@@ -8,7 +8,7 @@ import { map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class WorkoutDataService {
-  private readonly _appUrl = '/API/recipes/';
+  private readonly _appUrl = '/API/workouts/';
 
 
   constructor(private http: HttpClient) { 
@@ -29,8 +29,10 @@ export class WorkoutDataService {
 
   addNewWorkout(workout: Workout): Observable<Workout> {
     return this.http
-      .post(`${this._appUrl}/workouts/`, workout)
-      .pipe(map(Workout.fromJSON));
+      .post(this._appUrl, workout)
+      .pipe(
+        map(
+          (item: any): Workout => new Workout(item.date, item.exercises, item.repetitions)));
   }
 
   
