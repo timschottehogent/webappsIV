@@ -1,22 +1,26 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component, Output, EventEmitter, OnInit } from '@angular/core';
 import { Workout } from '../workout/workout.model';
+import { FormGroup, FormControl, Validators, FormBuilder, FormArray } from '@angular/forms';
 
 @Component({
   selector: 'app-add-workout',
   templateUrl: './add-workout.component.html',
   styleUrls: ['./add-workout.component.css']
 })
-export class AddWorkoutComponent  {
-  @Output() public newWorkout = new EventEmitter<Workout>();
+export class AddWorkoutComponent implements OnInit {
+  private workout: FormGroup;
 
-  constructor() { }
+  ngOnInit(){
+    this.workout = new FormGroup({
+      date: new FormControl()
+    })
+  };
 
-
-
-  addWorkout(newWorkoutDate: HTMLInputElement) : boolean {
-    const workout = new Workout(new Date(newWorkoutDate.value));
-    this.newWorkout.emit(workout);
-    return false;
+  onSubmit() {
+    this.workout.emit(new Workout(this.workout.value.name));
   }
+
+
+
 
 }

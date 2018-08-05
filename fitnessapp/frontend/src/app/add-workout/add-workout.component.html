@@ -1,11 +1,9 @@
-<div class="ui large form segment"> 
-  <h3 class="ui header">Add Workout</h3>
-  <div class="field">
-	  <label for="date">Date:</label> 
-	  <input type="date" id="date" date="date" #newworkoutdate>
+<form [formGroup]='workout' (ngSubmit)='onSubmit()'>
+  <h3>add workout</h3>
+  <div>
+    <label for='date_id'>date:</label>
+    <input type='date' id='date_id' formControlName='date'>
   </div>
-  <button (click)="addWorkout(newworkoutdate)"
-  	    class="ui positive right floated button">
-    add workout 
-  </button>
-</div>
+  <button type='submit'>add</button>
+</form> 
+REMOVE {{ recipe.value | json }}

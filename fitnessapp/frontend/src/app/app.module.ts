@@ -7,6 +7,9 @@ import { WorkoutComponent } from './workout/workout.component';
 import { ExerciseComponent } from './exercise/exercise.component';
 import { AddWorkoutComponent } from './add-workout/add-workout.component';
 import { WorkoutFilterPipe } from './workout-filter.pipe';
+import { WorkoutListComponent } from './workout-list/workout-list.component';
+import { ReactiveFormsModule } from '@angular/forms';
+
 
 
 @NgModule({
@@ -15,11 +18,13 @@ import { WorkoutFilterPipe } from './workout-filter.pipe';
     WorkoutComponent,
     ExerciseComponent,
     AddWorkoutComponent,
-    WorkoutFilterPipe
+    WorkoutFilterPipe,
+    WorkoutListComponent
   ],
   imports: [
     BrowserModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
