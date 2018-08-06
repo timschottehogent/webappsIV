@@ -2,8 +2,26 @@
   <h3>add workout</h3>
   <div>
     <label for='date_id'>date:</label>
-    <input type='date' id='date_id' formControlName='date'>
+    <input type='date' id='date_id' formControlName='date' #spy>
+  </div>
+  <div *ngIf='workout.get("date").errors?.required
+      && workout.get("date").touched' 
+    class='ui pointing red basic label'>
+    error! this is required
   </div>
   <button type='submit'>add</button>
+
+
+<div formArrayName='exercises'
+  *ngFor='let item of workout.get("exercises").controls; 
+          let i = index'>
+  <div [formGroupName] = 'i'>
+    <label for="exercise_name">exercise:</label>
+    <div>
+        <input type="text" id="exercise_name" formControlName='name'>
+      
+        <input type="text" id="exercise_difficulty" formControlName='difficulty'>
+    </div>
+  </div>
+</div>
 </form> 
-REMOVE {{ recipe.value | json }}

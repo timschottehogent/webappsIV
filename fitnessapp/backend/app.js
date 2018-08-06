@@ -8,6 +8,7 @@ var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/workoutdb');
 
 require('./models/Workout');
+require('./models/Exercise');
 
 
 var indexRouter = require('./routes/index');
@@ -38,7 +39,7 @@ app.use(function(err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.render('error');
+  res.json(err.message);
 });
 
 module.exports = app;

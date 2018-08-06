@@ -1,4 +1,6 @@
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Exercise } from '../exercise/exercise.model';
+
 
 
 export class Workout {
@@ -13,14 +15,25 @@ export class Workout {
       repetitions: Number[] = []
     ) {
       this._date = date;
+      this._exercises = exercises;
+      this._repetitions = repetitions;
     }
     get date() : Date {
       return this._date;
     }	
+
+    get id(): string{
+      return this._id;
+    }
     addExercise(ex: Exercise, reps: number) {
       this._exercises.push(ex);
       this._repetitions.push(reps);
     }
+
+    get exercises(): Exercise[] {
+      return this._exercises;
+    }
+    
 
     static fromJSON(json: any): Workout {
       const rec = new Workout(
