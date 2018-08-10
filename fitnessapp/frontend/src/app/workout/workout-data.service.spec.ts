@@ -1,6 +1,6 @@
 import { TestBed, inject } from '@angular/core/testing';
 
-import { WorkoutDataService } from './workout-data.service';
+import { WorkoutDataService } from '../workout/workout-data.service';
 
 describe('WorkoutDataService', () => {
   beforeEach(() => {

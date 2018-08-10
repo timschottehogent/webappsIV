@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Workout } from './workout/workout.model';
-import { WorkoutDataService } from './workout-data.service';
+import { Workout } from './workout/workout/workout.model';
+import { WorkoutDataService } from './workout/workout-data.service';
 import { Observable } from 'rxjs';
 
 @Component({

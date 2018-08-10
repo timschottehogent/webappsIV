@@ -3,6 +3,8 @@ import { Workout } from '../workout/workout.model';
 import { Exercise } from '../exercise/exercise.model';
 import { FormGroup, Validators, FormBuilder, FormArray } from '@angular/forms';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { WorkoutDataService } from '../workout-data.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-add-workout',
@@ -10,10 +12,13 @@ import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
   styleUrls: ['./add-workout.component.css']
 })
 export class AddWorkoutComponent implements OnInit {
-  @Output() public newWorkout = new EventEmitter<Workout>();
   public workout: FormGroup;
+  public errorMsg: string;
 
-  constructor(private fb: FormBuilder){}
+  constructor(
+    private fb: FormBuilder,
+    private _workoutDataServie: WorkoutDataService
+  ){}
 
   ngOnInit(){
     this.workout = this.fb.group({
@@ -47,14 +52,24 @@ export class AddWorkoutComponent implements OnInit {
   }
 
   onSubmit() {
-    const workout = new Workout(this.workout.value.name);
-    for (const ex of this.workout.value.exercises) {
-      if (ex.name.length > 2) {
-        workout.addExercise(new Exercise(ex.name, 
-          ex.difficulty ),0);
+    const workout = new Workout(this.workout.value.data);
+    for(const ex of this.workout.value.exercises){
+      if(ex.name.length > 2){
+        const exercise = new Exercise(
+          ex.name,
+          ex.difficulty
+        );
+        workout.addExercise(exercise, 1);
       }
     }
-    this.newWorkout.emit(workout);
+    this._workoutDataServie.addNewWorkout(workout).subscribe(
+      () => {},
+      (error: HttpErrorResponse) => {
+        this.errorMsg = `Error ${error.status} while adding workout for ${
+          workout.date
+        }: ${error.error}`;
+      }
+    );
   }
 
   createExercises(): FormGroup{

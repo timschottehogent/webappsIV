@@ -1,13 +1,9 @@
 <div class="ui container">
-  <div class="ui basic segment">
-    <app-add-workout (newWorkout)="newWorkoutAdded($event)">
-
-    </app-add-workout>
+  <div class="ui two item menu">
+    <a class='item' routerLinkActive='active' 
+      routerLink="workout/list" >Workouts</a>
+    <a class='item' routerLinkActive='active' 
+      routerLink="workout/add" >Add Workout</a>
   </div>
-  <div class="ui segment">
-    <div class="ui cards">
-      <app-workout *ngFor='let localworkout of workouts ' 
-        [workout]='localworkout'></app-workout>
-    </div>
-  </div>
+  <router-outlet></router-outlet>
 </div>

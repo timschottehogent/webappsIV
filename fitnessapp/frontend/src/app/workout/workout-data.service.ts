@@ -10,7 +10,7 @@ import { Exercise } from './exercise/exercise.model';
   providedIn: 'root'
 })
 export class WorkoutDataService {
-  private readonly _appUrl = '/API/workouts/';
+  private readonly _appUrl = '/API/workouts';
 
 
   constructor(private http: HttpClient) { 
@@ -41,6 +41,12 @@ export class WorkoutDataService {
     Observable<Exercise> {
       const theUrl = `${this._appUrl}${work.id}/exercises`;
       return this.http.post(theUrl, ex).pipe(map(Exercise.fromJSON));
+  }
+
+  getWorkout(id: string): Observable<Workout> {
+    return this.http
+      .get(`${this._appUrl}/workout/${id}`)
+      .pipe(map(Workout.fromJSON));
   }
 
   
