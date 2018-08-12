@@ -40,9 +40,9 @@ router.post('/checkusername', function(req, res, next) {
   User.find({username: req.body.username}, 
     function(err, result) {
       if (result.length) {
-        res.json({'username': 'alreadyexists'})
+        res.json({username: 'alreadyexists'})
       } else {
-        res.json({'username': 'ok'})
+        res.json({username: 'ok'})
       }
   });
 });
