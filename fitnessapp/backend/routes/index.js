@@ -4,6 +4,9 @@ var router = express.Router();
 let mongoose = require('mongoose');
 let Workout = mongoose.model('Workout');
 let Exercise = mongoose.model('Exercise');
+let jwt = require('express-jwt');
+
+let auth = jwt({secret: process.env.RECIPE_BACKEND_SECRET});
 
 router.get('/API/workouts/', function(req, res, next) {
   let query = Workout.find().populate('exercises');
@@ -28,7 +31,7 @@ router.get('/API/workout/:workout', function(req, res) {
   res.json(req.workout);
 });
 
-router.delete('/API/workout/:workout', function(req, res) {
+router.delete('/API/workout/:workout', auth, function(req, res) {
   Exercises.remove({ _id: {$in: req.workout.exercises }}, 
     function (err) {
       if (err) return next(err);
@@ -44,7 +47,7 @@ router.get('/', function(req, res, next) {
   res.send('server works!');
 });
 
-router.post('/API/workouts/', function (req, res, next) {
+router.post('/API/workouts/', auth, function (req, res, next) {
   console.log('test');
   Exercise.create(req.body.exercises, function(err, ex) {
     if (err) {

@@ -3,12 +3,15 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+let passport = require('passport');
 
 var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/workoutdb');
 
+require('./models/User');
 require('./models/Workout');
 require('./models/Exercise');
+require('./config/Passport');
 
 
 var indexRouter = require('./routes/index');
@@ -22,6 +25,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(passport.initialize());
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);

@@ -11,13 +11,13 @@ import { WorkoutDataService } from './workout-data.service';
 import { RouterModule, Routes } from '@angular/router';
 import { WorkoutDetailComponent } from './workout-detail/workout-detail.component';
 import { WorkoutResolverService } from './workout-resolver.service';
-
+import { httpInterceptorProviders } from '../http-interceptors'
 
 const routes = [
   { path: 'list', component: WorkoutListComponent },
   { path: 'add', component: AddWorkoutComponent },
   { path: ':id', component: WorkoutDetailComponent,
-  resolve: { recipe: WorkoutResolverService }}
+  resolve: { workout: WorkoutResolverService }}
 ];
 
 @NgModule({
@@ -37,6 +37,7 @@ const routes = [
 
   ],
   providers: [
+    httpInterceptorProviders, 
     WorkoutDataService,
     WorkoutResolverService
   ]

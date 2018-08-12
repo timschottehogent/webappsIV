@@ -1,3 +1,9 @@
-<p>
-  workout-list works!
-</p>
+<div class="ui segment">
+  <div *ngIf='errorMsg' class="ui error message">{{errorMsg}}</div>
+  
+  <div class="ui basic segment">
+    <div class="ui cards">
+      <app-workout *ngFor='let localWorkout of workouts' [workout]='localWorkout' (deleteWorkout)='removeWorkout($event)'></app-workout>
+    </div>
+  </div>
+</div>

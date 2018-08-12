@@ -29,6 +29,12 @@ export class WorkoutDataService {
       );
   }
 
+  removeWorkout(rec: Workout): Observable<Workout> {
+    return this.http
+      .delete(`${this._appUrl}/workout/${rec.id}`)
+      .pipe(map(Workout.fromJSON));
+  }
+
   addNewWorkout(workout: Workout): Observable<Workout> {
     return this.http
       .post(this._appUrl, workout)

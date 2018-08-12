@@ -9,6 +9,6 @@ ExerciseSchema.pre('remove', function (next) {
     this.model('Exercise').update({}, 
       { $pull: { exercises: this._id } }, 
       { safe: true, multi: true }, next);
-  })
+  });
 
 mongoose.model('Exercise', ExerciseSchema);
