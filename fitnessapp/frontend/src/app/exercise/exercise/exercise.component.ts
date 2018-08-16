@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Exercise } from './exercise.model';
 
 @Component({
@@ -8,10 +8,16 @@ import { Exercise } from './exercise.model';
 })
 export class ExerciseComponent implements OnInit {
   @Input() public exercise: Exercise;
+  @Output() public deleteExercise = new EventEmitter<Exercise>();
 
   constructor() { }
 
   ngOnInit() {
+  }
+
+  removeExercise() {
+    console.log(this.exercise);
+    this.deleteExercise.emit(this.exercise);
   }
 
 }

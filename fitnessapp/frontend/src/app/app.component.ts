@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Workout } from './workout/workout/workout.model';
+import { AuthenticationService } from './user/authentication.service';
 import { WorkoutDataService } from './workout/workout-data.service';
 import { Observable } from 'rxjs';
 
@@ -9,28 +9,11 @@ import { Observable } from 'rxjs';
   styleUrls: ['./app.component.css'],
   providers: [WorkoutDataService]
 })
-export class AppComponent  implements OnInit{
-  title = 'Fitnessapp';
+export class AppComponent {
+  constructor(private authService: AuthenticationService) {}
 
-  private _workouts: Workout[];
-
-  ngOnInit(){
-    this._workoutDataService.workouts.subscribe(
-      workouts => (this._workouts = workouts)
-    );
+  get currentUser(): Observable<string> {
+    return this.authService.user$;
   }
-
-  constructor(private _workoutDataService: WorkoutDataService) {
-    
-  }
-
-  get workouts(){
-    return this._workouts;
-  }
-  
-  newWorkoutAdded(workout) {
-    this._workoutDataService
-    .addNewWorkout(workout)
-    .subscribe((work: Workout) => this._workouts.push(work));
 }
-}
+

@@ -1,0 +1,15 @@
+<div class="ui segment">
+  <div *ngIf='errorMsg' class="ui error message">{{errorMsg}}</div>
+  <div class="ui basic segment">
+    <div class="ui two fields">
+      <div class="ui input">
+        <input (keyup)='filterExercise$.next($event.target.value)' type='text' id='filter' name='filter' placeholder='filter exercise name...'>
+      </div>
+    </div>
+  </div>
+  <div class="ui basic segment">
+    <div class="ui cards">
+      <app-exercise *ngFor='let localExercise of exercises | exerciseFilter:filterExerciseName' [exercise]='localExercise' (deleteExercise)='removeExercise($event)'></app-exercise>
+    </div>
+  </div>
+</div>

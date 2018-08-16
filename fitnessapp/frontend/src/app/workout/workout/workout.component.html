@@ -1,9 +1,16 @@
-<p>
-  workout for {{workout.date | date}}
-</p>
-Exercises:
-<ul>
-  <li *ngFor="let ex of exercises">
-    <app-exercise [exercise]="ex"></app-exercise>
-  </li>
-</ul>
+<div class="ui card">
+  <div class="content">
+    <a class="header" href='/workout/{{workout.id}}'>{{ workout.name }}</a>
+    <div class="meta">
+      <span class="date">added on {{workout.date | date}} </span>
+    </div>
+    <ul class="ui list">
+        <li *ngFor='let ex of workout.exercises'>
+          {{ex.name}} 
+        </li>
+      </ul>
+    <button class="ui icon button" (click)="removeWorkout()">
+      <i class="trash outline icon"></i>
+    </button>
+  </div>
+</div>

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { WorkoutDataService } from './workout-data.service';
-import { ActivatedRouteSnapshot, RouterStateSnapshot, Resolve } from '../../../node_modules/@angular/router';
-import { Observable } from '../../../node_modules/rxjs';
+import { ActivatedRouteSnapshot, RouterStateSnapshot, Resolve } from '@angular/router';
+import { Observable } from 'rxjs';
 import { Workout } from './workout/workout.model';
 
 @Injectable({

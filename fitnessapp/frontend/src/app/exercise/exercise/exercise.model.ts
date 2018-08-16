@@ -1,5 +1,5 @@
 export class Exercise{
-    private _id: string;
+    private _id: string = '';
     private _name: string;
     private _difficulty: number;
 

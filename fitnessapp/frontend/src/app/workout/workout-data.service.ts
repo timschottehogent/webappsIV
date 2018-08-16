@@ -3,7 +3,7 @@ import { Workout } from './workout/workout.model';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { Exercise } from './exercise/exercise.model';
+import { Exercise } from '../exercise/exercise/exercise.model';
 
 
 @Injectable({
@@ -22,26 +22,31 @@ export class WorkoutDataService {
       .get(this._appUrl)
       .pipe(
         map((list: any[]): Workout[] =>
-          list.map(item => 
-            new Workout(item.date)
+          list.map(
+            Workout.fromJSON
           )
         )
       );
   }
 
   removeWorkout(rec: Workout): Observable<Workout> {
+    
     return this.http
-      .delete(`${this._appUrl}/workout/${rec.id}`)
+      .delete(`${this._appUrl}/${rec.id}`)
       .pipe(map(Workout.fromJSON));
   }
 
   addNewWorkout(workout: Workout): Observable<Workout> {
     return this.http
-      .post(this._appUrl, workout)
+      .post(`${this._appUrl}/`, workout)
       .pipe(
         map(
-          (item: any): Workout => new Workout(item.date, item.exercises, item.repetitions)));
+          Workout.fromJSON
+        ));
   }
+
+
+  
 
   addExerciseToWorkout(ex: Exercise, work: Workout): 
     Observable<Exercise> {

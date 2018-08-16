@@ -1,22 +1,22 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Exercise } from '../exercise/exercise.model';
+import { Exercise } from '../../exercise/exercise/exercise.model';
+import { AuthenticationService } from '../../user/authentication.service';
 
 
 
 export class Workout {
-    private _id: string;
+    private _id: string = '';
+    private _user: string = '';
     private _date: Date = new Date();
-    private _exercises = new Array<Exercise>();
-    private _repetitions = new Array<Number>();
+    private _exercises: Exercise[] = [];
+    private _repetitions : Number[] = [];
+    //private authenticatService: AuthenticationService;
   
     constructor(
-      date: Date,
-      exercises: Exercise[] = [],
-      repetitions: Number[] = []
+      date: Date
     ) {
       this._date = date;
-      this._exercises = exercises;
-      this._repetitions = repetitions;
+
     }
     get date() : Date {
       return this._date;
@@ -37,17 +37,24 @@ export class Workout {
 
     static fromJSON(json: any): Workout {
       const rec = new Workout(
-        json.date,
-        json.exercises.map(Exercise.fromJSON),
-        json.created
+        json.date
+        
+        
       );
       rec._id = json._id;
+      rec._exercises = json.exercises.map(Exercise.fromJSON);
+      rec._repetitions = json.repetitions;
       return rec;
     }
+
+
+    
   
     toJSON() {
+      console.log(this._exercises);
       return {
         _id: this._id,
+        //user: this.authenticatService.user$.getValue(),
         date: this._date,
         exercises: this._exercises.map(ex => ex.toJSON()),
         reps: this._repetitions

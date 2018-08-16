@@ -1,0 +1,17 @@
+<form [formGroup]='exercise' (ngSubmit)='onSubmit()'>
+  <h3>add exercise</h3>
+
+  <div class="ui labeled input">
+    <div class="ui label">
+      Name
+    </div>
+    <input type="text" placeholder="Min 5 characters" formControlName='name'>
+  </div>
+  <div class="ui labeled input">
+    <div class="ui label">
+      Difficulty
+    </div>
+    <input type="number" placeholder="Between 1-10" formControlName='difficulty'>
+  </div>
+  <button type='submit'>add</button>
+</form> 

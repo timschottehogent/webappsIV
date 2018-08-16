@@ -1,0 +1,12 @@
+<div class="ui card">
+  <div class="content">
+    <a class="header" href='/exercise/{{exercise.id}}'>{{ exercise.name }}</a>
+    <div class="meta">
+      <span class="date">difficulty {{exercise.difficulty}} id {{exercise.id}}</span>
+    </div>
+    
+    <button class="ui icon button" (click)="removeExercise()">
+      <i class="trash outline icon"></i>
+    </button>
+  </div>
+</div>

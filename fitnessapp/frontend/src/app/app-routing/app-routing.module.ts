@@ -12,6 +12,11 @@ const appRoutes: Routes = [
     canActivate: [ AuthGuardService ],
     loadChildren: 'src/app/workout/workout.module#WorkoutModule'
   },
+  {
+    path: 'exercise',
+    canActivate: [ AuthGuardService ],
+    loadChildren: 'src/app/exercise/exercise.module#ExerciseModule'
+  },
   { path: '', redirectTo: 'workout/list', pathMatch: 'full'},
   { path: '**', component: PageNotFoundComponent}
 ];

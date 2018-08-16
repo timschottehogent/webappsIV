@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { WorkoutDataService } from '../workout-data.service';
 import { Workout } from '../workout/workout.model';
 import { HttpErrorResponse } from '@angular/common/http';
+import { AuthenticationService } from '../../user/authentication.service';
 
 @Component({
   selector: 'workout-list',
@@ -11,8 +12,9 @@ import { HttpErrorResponse } from '@angular/common/http';
 export class WorkoutListComponent implements OnInit {
   private _workouts: Workout[];
   public errorMsg: string;
+  public userName: string;
 
-  constructor(private _workoutDataService: WorkoutDataService) { }
+  constructor(private _workoutDataService: WorkoutDataService, private _authenticationService: AuthenticationService) { }
 
   ngOnInit() {
     this._workoutDataService.workouts
@@ -22,6 +24,7 @@ export class WorkoutListComponent implements OnInit {
           error.status
         } while trying to retrieve workouts: ${error.error}`;
       }
+    this._authenticationService.user$.subscribe(item => this.userName = item);
   }
 
   get workouts(){

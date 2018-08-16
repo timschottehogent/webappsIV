@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Workout } from './workout.model';
 
 @Component({
@@ -8,12 +8,13 @@ import { Workout } from './workout.model';
 })
 export class WorkoutComponent implements OnInit {
   @Input() public workout: Workout;
+  @Output() public deleteWorkout = new EventEmitter<Workout>();
 
-  constructor() { 
+  constructor() {}
 
+  ngOnInit() {}
+
+  removeWorkout() {
+    this.deleteWorkout.emit(this.workout);
   }
-
-  ngOnInit() {
-  }
-
 }

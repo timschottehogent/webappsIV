@@ -1,5 +1,5 @@
 import { HttpModule } from '@angular/http';
-import { AuthenticationService } from './../authentication.service';
+import { AuthenticationService } from '../authentication.service';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { LogoutComponent } from './logout.component';

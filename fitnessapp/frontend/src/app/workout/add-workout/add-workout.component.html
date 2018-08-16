@@ -1,27 +1,47 @@
-<form [formGroup]='workout' (ngSubmit)='onSubmit()'>
-  <h3>add workout</h3>
-  <div>
-    <label for='date_id'>date:</label>
-    <input type='date' id='date_id' formControlName='date' #spy>
-  </div>
-  <div *ngIf='workout.get("date").errors?.required
-      && workout.get("date").touched' 
-    class='ui pointing red basic label'>
-    error! this is required
-  </div>
-  <button type='submit'>add</button>
+<div class="ui segment">
+  <div *ngIf='errorMsg' class="ui error message">{{errorMsg}}</div>
+  <form class="ui form" [formGroup]='workout' (ngSubmit)='onSubmit()'>
+    <h4 class="ui dividing header">add workout</h4>
+    <div class="field">
+      <label for="date_id">name</label>
+      <input type="date" id="date_id" name="date_id" formControlName='date'>
+      <div *ngIf='workout.get("date").errors?.required && workout.get("date").touched' class='ui pointing red basic label'>
+        A date is required
+      </div>
+    </div>
+
+    
 
 
-<div formArrayName='exercises'
-  *ngFor='let item of workout.get("exercises").controls; 
-          let i = index'>
-  <div [formGroupName] = 'i'>
-    <label for="exercise_name">exercise:</label>
-    <div>
-        <input type="text" id="exercise_name" formControlName='name'>
-      
-        <input type="text" id="exercise_difficulty" formControlName='difficulty'>
+<div class="field">
+    <label for="exercise_name">exercises</label>
+    <div formArrayName='exercises' *ngFor='let item of exercises.controls; 
+        let i = index'>
+      <div [formGroupName]='i'>
+        <div class='two fields'>
+          <div class="field">
+            <select class='ui fluid dropdown' id="exercise_name" formControlName='name'>
+              <option></option>
+              <option *ngFor='let ex of exercisesarray' [value]=ex.id>
+                {{ex.name}}
+              </option>
+            </select>
+          </div>
+          <div class="field">
+            <input type="text" id="exercise_repetitions" formControlName='repetitions'>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
+
+
+
+    
+
+    
+    <button type='submit' class="ui positive right button">
+      add workout
+    </button>
+  </form>
 </div>
-</form> 

@@ -16,54 +16,108 @@ router.get('/API/workouts/', function(req, res, next) {
   })
 });
 
-router.get('/API/workout/:id', function(req, res, next, id) {
-  let query = Workout.findById(id);
+router.post('/API/workouts/', auth, function (req, res, next) {
+    console.log(req.body.name);
+    let workout = new Workout({date: req.body.date, exercises: req.body.exercises, 
+      repetitions: req.body.repetitions, user: req.user.name});
+    workout.save(function(err, post) {
+      
+      res.json(workout);
+    });
+  
+}); 
+
+router.post('/API/exercises/', auth, function (req, res, next) {
+
+
+  let exercise = new Exercise({name: req.body.name, 
+    difficulty: req.body.difficulty, exercises: req.body.exercises});
+  exercise.save(function(err, post) {
+    res.json(exercise);
+  });
+}); 
+
+
+router.param('workout', function(req, res, next, id) {
+  let query = Workout.findById(id).populate('exercises');
   query.exec(function(err, workout) {
-    if (err) { return next(err); }
-    if (!workout) 
+    if (err) {
+      return next(err);
+    }
+    if (!workout) {
       return next(new Error('not found ' + id));
+    }
     req.workout = workout;
     return next();
   });
 });
 
+
 router.get('/API/workout/:workout', function(req, res) {
   res.json(req.workout);
 });
 
-router.delete('/API/workout/:workout', auth, function(req, res) {
-  Exercises.remove({ _id: {$in: req.workout.exercises }}, 
-    function (err) {
-      if (err) return next(err);
-      req.workout.remove(function(err) {
-        if (err) { return next(err); }   
-        res.json(req.workout);
-      });
-    })
-})
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.send('server works!');
-});
-
-router.post('/API/workouts/', auth, function (req, res, next) {
-  console.log('test');
-  Exercise.create(req.body.exercises, function(err, ex) {
+router.delete('/API/workouts/:workout', auth, function(req, res) {
+  req.workout.remove(function(err) {
     if (err) {
       return next(err);
     }
-    let workout = new Workout({date: req.body.date, 
-      repetitions: req.body.repetitions});
-    workout.exercises = ex;
-    workout.save(function(err, post) {
-      if (err){
-        Exercise.remove({ _id: { $in: workout.exercises } });
-        return next(err);
-      }
-      res.json(workout);
-    });
+    res.json(req.workout);
   });
-});  
+})
+
+
+
+router.get('/API/exercises/', function(req, res, next) {
+  Exercise.find(function(err, exercises) {
+    if (err) { return next(err); }
+    res.json(exercises);
+  });
+});
+
+
+
+
+router.param('exercise', function(req, res, next, id) {
+  let query = Exercise.findById(id);
+  query.exec(function(err, exercise) {
+    if (err) {
+      return next(err);
+    }
+    if (!exercise) {
+      return next(new Error('not found ' + id));
+    }
+    req.exercise = exercise;
+    return next();
+  });
+});
+
+
+router.get('/API/exercises/exerise/:exercise', function(req, res) {
+  res.json(req.exercise);
+});
+
+router.get('/API/exercises/:exercise', function(req, res) {
+  res.json(req.exercise);
+});
+
+
+router.delete('/API/exercises/:exercise', auth, function(req, res) {
+  req.exercise.remove(function(err) {
+    if (err) {
+      return next(err);
+    }
+    res.json(req.exercise);
+  });
+});
+
+
+
+
+
+
+
+ 
 
 module.exports = router;

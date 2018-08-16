@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { WorkoutComponent } from './workout/workout.component';
-import { ExerciseComponent } from './exercise/exercise.component';
 import { AddWorkoutComponent } from './add-workout/add-workout.component';
 import { WorkoutListComponent } from './workout-list/workout-list.component';
 import { WorkoutFilterPipe } from './workout-filter.pipe';
@@ -12,6 +11,11 @@ import { RouterModule, Routes } from '@angular/router';
 import { WorkoutDetailComponent } from './workout-detail/workout-detail.component';
 import { WorkoutResolverService } from './workout-resolver.service';
 import { httpInterceptorProviders } from '../http-interceptors'
+import { UserModule } from '../user/user.module';
+import { Exercise } from '../exercise/exercise/exercise.model';
+import { ExerciseComponent } from '../exercise/exercise/exercise.component';
+import { ExerciseModule } from '../exercise/exercise.module';
+
 
 const routes = [
   { path: 'list', component: WorkoutListComponent },
@@ -20,16 +24,18 @@ const routes = [
   resolve: { workout: WorkoutResolverService }}
 ];
 
+
 @NgModule({
   imports: [
     HttpClientModule,
     CommonModule,
     ReactiveFormsModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    UserModule
+    //ExerciseModule
   ],
   declarations: [
     WorkoutComponent,
-    ExerciseComponent,
     AddWorkoutComponent,
     WorkoutListComponent,
     WorkoutFilterPipe,
