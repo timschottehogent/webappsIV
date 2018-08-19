@@ -6,7 +6,7 @@ var logger = require('morgan');
 let passport = require('passport');
 
 var mongoose = require('mongoose');
-mongoose.connect(process.env.FITNESS_DATABASE || 'mongodb://localhost/recipedb');
+mongoose.connect(process.env.FITNESS_DATABASE);
 
 require('./models/User');
 require('./models/Workout');
@@ -16,9 +16,10 @@ require('./config/Passport');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+let cors = require('cors');
 
 var app = express();
-let cors = require('cors');
+
 app.use(cors({origin: "*"}));
 
 app.use(logger('dev'));
