@@ -6,7 +6,7 @@ var logger = require('morgan');
 let passport = require('passport');
 
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/workoutdb');
+mongoose.connect(process.env.MONGOLAB_URI || 'mongodb://localhost/recipedb');
 
 require('./models/User');
 require('./models/Workout');
@@ -18,7 +18,8 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
 var app = express();
-
+let cors = require('cors');
+app.use(cors({origin: "*"}));
 
 app.use(logger('dev'));
 app.use(express.json());

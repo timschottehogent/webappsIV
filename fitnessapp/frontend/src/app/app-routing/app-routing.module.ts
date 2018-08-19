@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes, PreloadAllModules } from '@angular/router';
 import { PageNotFoundComponent } from '../page-not-found/page-not-found.component';
 import { AddWorkoutComponent } from '../workout/add-workout/add-workout.component';
-import { WorkoutFilterPipe } from '../workout/workout-filter.pipe';
 import { WorkoutListComponent } from '../workout/workout-list/workout-list.component';
 import { AuthGuardService } from '../user/auth-guard.service'
 

@@ -14,6 +14,7 @@ import { UserModule } from '../user/user.module';
 import { Exercise } from '../exercise/exercise/exercise.model';
 import { ExerciseComponent } from '../exercise/exercise/exercise.component';
 import { ExerciseModule } from '../exercise/exercise.module';
+import { basehttpInterceptorProviders } from '../http-interceptors/index'
 
 
 const routes = [
@@ -41,9 +42,13 @@ const routes = [
 
   ],
   providers: [
+    basehttpInterceptorProviders,
     httpInterceptorProviders, 
     WorkoutDataService,
     WorkoutResolverService
   ]
 })
+
+
+
 export class WorkoutModule { }

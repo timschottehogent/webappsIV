@@ -6,7 +6,6 @@ import { AppComponent } from './app.component';
 import { WorkoutComponent } from './workout/workout/workout.component';
 import { ExerciseComponent } from './exercise/exercise/exercise.component';
 import { AddWorkoutComponent } from './workout/add-workout/add-workout.component';
-import { WorkoutFilterPipe } from './workout/workout-filter.pipe';
 import { WorkoutListComponent } from './workout/workout-list/workout-list.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
