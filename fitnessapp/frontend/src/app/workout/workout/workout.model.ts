@@ -6,10 +6,10 @@ import { AuthenticationService } from '../../user/authentication.service';
 
 export class Workout {
     private _id: string = '';
-    private _user: string = '';
+    private _username: string = '';
     private _date: Date = new Date();
     private _exercises: Exercise[] = [];
-    private _repetitions : Number[] = [];
+    private _repetitions : number[] = [];
     //private authenticatService: AuthenticationService;
   
     constructor(
@@ -22,6 +22,10 @@ export class Workout {
       return this._date;
     }	
 
+    get username(): string {
+      return this._username;
+    }
+
     get id(): string{
       return this._id;
     }
@@ -32,6 +36,18 @@ export class Workout {
 
     get exercises(): Exercise[] {
       return this._exercises;
+    }
+
+    get repetitions(): Number[] {
+      return this._repetitions;
+    }
+
+    totalDifficulty(): number {
+      let result: number = 0;
+      for(var i=0; i<this._exercises.length; i++){
+        result = result + this._exercises[i].difficulty * this._repetitions[i];
+      }
+      return result;
     }
     
 
@@ -44,6 +60,7 @@ export class Workout {
       rec._id = json._id;
       rec._exercises = json.exercises.map(Exercise.fromJSON);
       rec._repetitions = json.repetitions;
+      rec._username = json.username;
       return rec;
     }
 
@@ -51,13 +68,13 @@ export class Workout {
     
   
     toJSON() {
-      console.log(this._exercises);
       return {
         _id: this._id,
         //user: this.authenticatService.user$.getValue(),
         date: this._date,
         exercises: this._exercises.map(ex => ex.toJSON()),
-        reps: this._repetitions
+        repetitions: this._repetitions,
+        username: this._username
       };
     }
   }

@@ -29,6 +29,8 @@ export class WorkoutDataService {
       );
   }
 
+  
+
   removeWorkout(rec: Workout): Observable<Workout> {
     
     return this.http

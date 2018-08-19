@@ -8,18 +8,28 @@ let jwt = require('express-jwt');
 
 let auth = jwt({secret: process.env.RECIPE_BACKEND_SECRET});
 
-router.get('/API/workouts/', function(req, res, next) {
+router.get('/API/workouts/', auth, function(req, res, next) {
+  let user = req.user.username;
   let query = Workout.find().populate('exercises');
   query.exec(function(err, workouts) {
     if (err) return next(err);
-    res.json(workouts);
+    resultaat = workouts.filter(val => {
+      return val.username == user;
+    })
+    res.json(resultaat);
+
+    
+
+
+
   })
 });
 
 router.post('/API/workouts/', auth, function (req, res, next) {
-    console.log(req.body.name);
-    let workout = new Workout({date: req.body.date, exercises: req.body.exercises, 
-      repetitions: req.body.repetitions, user: req.user.name});
+    let workout = new Workout({date: req.body.date, exercises: req.body.exercises, repetitions: req.body.repetitions,
+       username: req.user.username});
+       
+       
     workout.save(function(err, post) {
       
       res.json(workout);
@@ -38,7 +48,7 @@ router.post('/API/exercises/', auth, function (req, res, next) {
 }); 
 
 
-router.param('workout', function(req, res, next, id) {
+router.param('workout', auth, function(req, res, next, id) {
   let query = Workout.findById(id).populate('exercises');
   query.exec(function(err, workout) {
     if (err) {
@@ -53,8 +63,14 @@ router.param('workout', function(req, res, next, id) {
 });
 
 
-router.get('/API/workout/:workout', function(req, res) {
-  res.json(req.workout);
+router.get('/API/workout/:workout', auth, function(req, res) {
+  let username = req.user.username;
+  Workout.find({user: username}, function(err, workouts){
+    if(err){
+      return next(err);
+    }
+    res.json(workouts);
+  });  
 });
 
 

@@ -2,15 +2,20 @@
   <div class="content">
     <a class="header" href='/workout/{{workout.id}}'>{{ workout.name }}</a>
     <div class="meta">
-      <span class="date">added on {{workout.date | date}} </span>
+      <span class="date">added on {{workout.date | date}} by {{workout.username}}</span>
     </div>
     <ul class="ui list">
-        <li *ngFor='let ex of workout.exercises'>
-          {{ex.name}} 
+        <li *ngFor='let ex of workout.exercises; let i = index'>
+          {{ex.name}}, #: {{workout.repetitions[i]}} 
         </li>
       </ul>
+      <div>
+          Total workout-difficulty: {{workout.totalDifficulty()}}
+        </div>
+        <p></p>
     <button class="ui icon button" (click)="removeWorkout()">
       <i class="trash outline icon"></i>
     </button>
   </div>
+  
 </div>

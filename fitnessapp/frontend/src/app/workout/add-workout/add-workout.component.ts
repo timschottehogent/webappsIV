@@ -42,6 +42,7 @@ export class AddWorkoutComponent implements OnInit {
           lastElement.name 
         ) {
           this.exercises.push(this.createExercises());
+
         } else if (exList.length >= 2) {
           const secondToLast = exList[exList.length - 2];
           if (
@@ -84,8 +85,8 @@ export class AddWorkoutComponent implements OnInit {
 
   createExercises(): FormGroup{
     return this.fb.group({
-      name: ['', [Validators.minLength(3)]],
-      repetitions: ['', [Validators.required]]
+      name: [''],
+      repetitions: ['']
     })
   }
 

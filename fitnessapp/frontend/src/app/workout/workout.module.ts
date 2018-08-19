@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { WorkoutComponent } from './workout/workout.component';
 import { AddWorkoutComponent } from './add-workout/add-workout.component';
 import { WorkoutListComponent } from './workout-list/workout-list.component';
-import { WorkoutFilterPipe } from './workout-filter.pipe';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { WorkoutDataService } from './workout-data.service';
@@ -38,7 +37,6 @@ const routes = [
     WorkoutComponent,
     AddWorkoutComponent,
     WorkoutListComponent,
-    WorkoutFilterPipe,
     WorkoutDetailComponent
 
   ],

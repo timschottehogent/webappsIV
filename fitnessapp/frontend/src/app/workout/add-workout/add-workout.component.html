@@ -1,6 +1,6 @@
 <div class="ui segment">
   <div *ngIf='errorMsg' class="ui error message">{{errorMsg}}</div>
-  <form class="ui form" [formGroup]='workout' (ngSubmit)='onSubmit()'>
+  <form class="ui form" [formGroup]='workout' (ngSubmit)='onSubmit()' #myForm="ngForm">
     <h4 class="ui dividing header">add workout</h4>
     <div class="field">
       <label for="date_id">name</label>
@@ -40,7 +40,7 @@
     
 
     
-    <button type='submit' class="ui positive right button">
+    <button [disabled]="!myForm.form.valid" type='submit' class="ui positive right button">
       add workout
     </button>
   </form>

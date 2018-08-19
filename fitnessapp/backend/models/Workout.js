@@ -8,7 +8,7 @@ var WorkoutSchema = new mongoose.Schema({
       ref: 'Exercise'
     }
   ],
-  repetitions: [Number],
-  user: String
+  repetitions: {type: Array, default:[]},
+  username: String
 });	
 mongoose.model('Workout', WorkoutSchema);

@@ -4,6 +4,7 @@ import { ExerciseDataService } from '../exercise-data-service.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Exercise } from '../exercise/exercise.model';
 
+
 @Component({
   selector: 'app-add-exercise',
   templateUrl: './add-exercise.component.html',
@@ -18,8 +19,8 @@ export class AddExerciseComponent implements OnInit {
 
   ngOnInit() {
     this.exercise = this.fb.group({
-      name: ['', [Validators.required]],
-      difficulty: ['', [Validators.required]]
+      name: ['', [Validators.required, Validators.minLength(5)]],
+      difficulty: ['', [Validators.required, Validators.minLength(1)]]
     });
   }
 
