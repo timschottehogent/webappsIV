@@ -3,7 +3,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-let passport = require('passport');
+var passport = require('passport');
 
 
 
@@ -15,6 +15,7 @@ require('./models/User');
 require('./models/Workout');
 require('./models/Exercise');
 require('./config/Passport');
+
 
 
 var indexRouter = require('./routes/index');
