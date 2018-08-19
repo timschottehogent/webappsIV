@@ -4,7 +4,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 let passport = require('passport');
-import { Passport } from 'passport';
+
 
 
 var mongoose = require('mongoose');
@@ -13,7 +13,7 @@ mongoose.connect(process.env.FITNESS_DATABASE, { useNewUrlParser: true });
 require('./models/User');
 require('./models/Workout');
 require('./models/Exercise');
-var test = require('./config/Passport');
+require('./config/Passport');
 
 
 var indexRouter = require('./routes/index');
