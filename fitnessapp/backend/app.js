@@ -13,7 +13,7 @@ mongoose.connect(process.env.FITNESS_DATABASE, { useNewUrlParser: true });
 require('./models/User');
 require('./models/Workout');
 require('./models/Exercise');
-require('./config/Passport');
+var test = require('./config/Passport');
 
 
 var indexRouter = require('./routes/index');
