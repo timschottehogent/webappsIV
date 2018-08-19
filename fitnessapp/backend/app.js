@@ -4,6 +4,8 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 let passport = require('passport');
+import { Passport } from 'passport';
+
 
 var mongoose = require('mongoose');
 mongoose.connect(process.env.FITNESS_DATABASE, { useNewUrlParser: true });
