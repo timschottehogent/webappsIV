@@ -3,7 +3,7 @@
   <form class="ui form" [formGroup]='workout' (ngSubmit)='onSubmit()' #myForm="ngForm">
     <h4 class="ui dividing header">add workout</h4>
     <div class="field">
-      <label for="date_id">name</label>
+      <label for="date_id">date</label>
       <input type="date" id="date_id" name="date_id" formControlName='date'>
       <div *ngIf='workout.get("date").errors?.required && workout.get("date").touched' class='ui pointing red basic label'>
         A date is required

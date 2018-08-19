@@ -11,7 +11,7 @@ import { Exercise } from '../exercise/exercise.model';
   styleUrls: ['./add-exercise.component.css']
 })
 export class AddExerciseComponent implements OnInit {
-  private exercise: FormGroup;
+  public exercise: FormGroup;
   public errorMsg: string;
 
   constructor(private fb: FormBuilder,
