@@ -7,6 +7,7 @@ let passport = require('passport');
 
 
 
+
 var mongoose = require('mongoose');
 mongoose.connect(process.env.FITNESS_DATABASE, { useNewUrlParser: true });
 
