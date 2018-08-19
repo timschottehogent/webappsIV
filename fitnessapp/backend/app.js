@@ -6,7 +6,7 @@ var logger = require('morgan');
 let passport = require('passport');
 
 var mongoose = require('mongoose');
-mongoose.connect(process.env.FITNESS_DATABASE);
+mongoose.connect(process.env.FITNESS_DATABASE, { useNewUrlParser: true });
 
 require('./models/User');
 require('./models/Workout');
